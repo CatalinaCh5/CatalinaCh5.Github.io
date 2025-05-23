@@ -1,0 +1,33 @@
+h1{
+  text-align:center;
+  font-family: cambria;
+  color: #52796f;
+   padding: 1rem;
+        border: solid white 5px; /* White border */
+        border-radius: 100px;
+        margin-top: 0.30rem;
+}
+body{
+  text-align:center;
+  font-family: cambria;
+  background-color:#84a98c;
+} 
+button{
+      background-color: #cad2c5; 
+      font weight: bold;
+            color: #2f3e46;
+            width: 160px;
+            margin-bottom: 20px;
+            padding: 7px 7px;
+            border: circle;
+            border-radius: 5px;
+            font-family: "italiac", serif;
+            box-shadow: 0px 0px 2px 2px rgb(230, 252, 241);
+            
+}
+button:hover {
+      background-color:#ffc8dd;
+      transition: 0.7s;
+  }
+/*each one of these changes how the page looks. the h1 class changes the color, centering, font, etc of the title of our project, "Random Quote and Poem Generator". The body class changes the way everything on the page looks. the button class changes the way the button looks, and button:hover adds different effects when you hover your cursor above the buttons.*/
+
