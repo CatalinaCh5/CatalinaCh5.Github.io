@@ -1,0 +1,249 @@
+<div class="container">
+
+  <h2>Memory Game</h2> 
+
+  <div class="game"></div>
+
+   <button class="reset-btn" onclick="resetGame()">Reset Game</button>
+</div>
+
+
+
+url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+
+margin:0; 
+
+padding:0;
+
+box-sizing:border-box;
+
+}   
+
+body{
+
+background:#BFCBC2; 
+
+font-family: Merriweather, serif;
+
+}
+
+.container{
+
+padding:30px;   
+
+width:420px;
+
+background:#232534;
+
+background:#FFF;
+
+position:absolute;
+
+top:50%;
+
+left:50%;
+
+transform:translate(-50%,-50%);
+
+border-radius:5px;
+
+padding-bottom:30px;
+
+
+}
+
+.container h2{
+
+text-align:center;
+
+font-size:17px;
+
+letter-spacing:2px;
+
+color:#000;
+
+margin-top:3px;
+
+text-transform:uppercase;
+
+}
+
+.container .reset-btn{
+
+all:unset; 
+
+height:40px;
+
+width:160px;
+
+background:#000;
+
+color:#FFF;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border-radius:3px;
+
+margin:auto;
+
+margin-top:18px;
+
+text-transform:uppercase;
+
+letter-spacing:1px;
+
+font-size:12px;
+
+cursor:pointer;
+
+}
+
+.container .game{
+
+width:100%;  
+
+height:350px;
+
+margin-top:25px;
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:7px;
+
+transform-style:preserve-3d;
+
+perspective:500px;
+
+}
+
+.item{
+
+position:relative; 
+
+height:74px;
+
+width:74px;
+
+background:white;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:25px;
+
+transition:all .25s;
+
+transform:rotateY(180deg);
+
+border:2px solid #000;
+
+border-radius:3px;
+
+}
+
+.item.boxOpen{
+
+transform:rotateY(0deg);
+
+}
+
+.item::after{
+
+content:"";  
+
+position:absolute;
+
+inset:0;
+
+background:#BFCBC2;
+
+transition:all .25s;
+
+transform:rotateY(0deg);
+
+backface-visibility:hidden;
+
+}
+
+.boxOpen::after,.boxMatch::after{
+
+transform:rotateY(180deg);        
+
+}
+
+::selection {
+
+background:rgb(100, 149, 237, 0.8);
+
+color:white;
+
+}
+
+//design, measurements, colors, fonts, etc for all containers
+
+
+
+
+const emojis = ["🥞","🥞","🌯","🌯","🍮","🍮","🪷","🪷","💐","💐","🐝","🐝","🐧","🐧","🐇","🐇","🪻","🪻","🧌","🧌"];  //Array of emojis that will be used for game
+
+let shuffleEmojis = shuffle(emojis); //Shuffles emojis so that they all show up in different boxes
+
+function shuffle(arr) {
+  return arr.sort(() => Math.random() - 0.5); // Shuffle function gives ability to shuffle emojis
+}
+
+function createBoard() { //generates game board where emojis will be displayed and handles flipping and matching emojis
+  const gameContainer = document.querySelector('.container .game'); //Finds spot on the page where the game will go
+  gameContainer.innerHTML = ''; // Clear the current board
+
+  for (let i = 0; i < shuffleEmojis.length; i++) {
+    let box = document.createElement('div'); //creates a new div element that will represent a single card on the game boward
+    box.classList.add('item'); //adds item to div (card)
+    
+    box.onclick = (e) => { 
+      e.target.classList.add('boxOpen'); //picks area where the game will be, inside container box, and looks for the part game to put the cards in
+      setTimeout(() => { //gives a certain amount of time for the flipped card to be shown before it flips upside down again or checks if there are any matching cards
+        if (document.querySelectorAll('.boxOpen').length > 1) { //Checks if two cards are open, if so check if the match
+          if (document.querySelectorAll('.boxOpen')[0].innerHTML == document.querySelectorAll('.boxOpen')[1].innerHTML) { //if emoji of two open cards match, then the following happens
+            document.querySelectorAll('.boxOpen')[0].classList.add('boxMatch');
+            document.querySelectorAll('.boxOpen')[1].classList.add('boxMatch'); //marks the matched cards to show they've been matched
+
+            document.querySelectorAll('.boxOpen')[1].classList.remove('boxOpen');
+            document.querySelectorAll('.boxOpen')[0].classList.remove('boxOpen'); //takes away "open" label from matched cards so they stay flipped and you can see emoji
+
+            if (document.querySelectorAll('.boxMatch').length === emojis.length) {
+              alert("You won!"); // Alert for when all pairs are matched ("You won!")
+            }
+          } else {
+            document.querySelectorAll('.boxOpen')[1].classList.remove('boxOpen');
+            document.querySelectorAll('.boxOpen')[0].classList.remove('boxOpen'); //if two cards don't match, boxOpen is removed so they both close again
+          }
+        }
+      }, 500); //500 milliseconds
+    };
+
+    box.innerHTML = shuffleEmojis[i]; //puts an emoji on each card from the shuffled list
+    gameContainer.appendChild(box); //puts new card with emoji on game screen
+  }
+}
+
+// Reset the game
+function resetGame() {
+  shuffleEmojis = shuffle(emojis); // Reshuffle the emojis
+  createBoard(); // Recreate the board with the reshuffled emojis
+}
+
+// Initialize the game when the page loads
+createBoard();
+
