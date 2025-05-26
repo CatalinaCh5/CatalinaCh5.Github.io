@@ -29,5 +29,4 @@ button:hover {
       background-color:#2a9d8f;
       transition: 0.7s;
   }
-/*each one of these changes how the page looks. the h1 class changes the color, centering, font, etc of the title of our project, "Random Quote and Poem Generator". The body class changes the way everything on the page looks. the button class changes the way the button looks, and button:hover adds different effects when you hover your cursor above the buttons.*/
 
