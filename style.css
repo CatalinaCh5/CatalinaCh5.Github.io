@@ -4,37 +4,37 @@
   height:230vh;
   grid-auto-rows: 110px;
   grid-template-areas:
-     "one 
-    "one 
-    "one 
-    "one"
-    "one"
-         "two"
-         "two"
-         "two"
-         "two"
-         "two"
-    "three"
-    "three"
-    "three"
-    "three"
-    "three"
-          "four"
-          "four"
-          "four"
-          "four"
-          "four"
-    "five"
-    "five"
-    "five"
-    "five"
-    "five"
-    "five"
-          "six"
-          "six
-          "six"
-          "six"
-          "six";
+    "one one" 
+    "one one" 
+    "one one" 
+    "one one"
+    "one one"
+    "two two"
+    "two two"
+    "two two"
+    "two two"
+    "two two"
+    "three three"
+    "three three"
+    "three three"
+    "three three"
+    "three three"
+    "four four"
+    "four four"
+    "four four"
+    "four four"
+    "four four"
+    "five five"
+    "five five"
+    "five five"
+    "five five"
+    "five five"
+    "five five"
+     "six six"
+     "six six
+     "six six"
+     "six six"
+     "six six";
      
 
     
@@ -65,4 +65,3 @@
   grid-area:six;
   border: 3px solid white; 
 }
-
